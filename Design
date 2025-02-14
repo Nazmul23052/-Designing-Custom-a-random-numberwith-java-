@@ -1,0 +1,41 @@
+
+
+import java.util.Random;
+
+public class RandomNumberGenerator {
+
+    private static final Random random = new Random();
+
+    // Generate a random integer in a given range
+    public static int generate(int min, int max) {
+        return random.nextInt(max - min + 1) + min;
+    }
+
+    // Generate a random double in a given range
+    public static double generate(double min, double max) {
+        return min + (max - min) * random.nextDouble();
+    }
+
+    // Generate a random float in a given range
+    public static float generate(float min, float max) {
+        return min + (max - min) * random.nextFloat();
+    }
+
+    // Generate a mixed random number (randomly selects type)
+    public static Number generateMixed(double min, double max) {
+        int choice = random.nextInt(3);
+        switch (choice) {
+            case 0: return generate((int) min, (int) max);
+            case 1: return generate((float) min, (float) max);
+            case 2: return generate(min, max);
+            default: return 0;  // Should never happen
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Random Integer: " + RandomNumberGenerator.generate(1, 100));
+        System.out.println("Random Double: " + RandomNumberGenerator.generate(1.0, 100.0));
+        System.out.println("Random Float: " + RandomNumberGenerator.generate(1.0f, 100.0f));
+        System.out.println("Random Mixed: " + RandomNumberGenerator.generateMixed(1.0, 100.0));
+    }
+}
